@@ -1,1 +1,1 @@
-# Praca-in-ynierska
+# Wykorzystanie sygnałów EEG do sterowania robotem mobilnym.
