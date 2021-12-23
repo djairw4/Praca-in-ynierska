@@ -1,6 +1,7 @@
 # Importowanie potrzebnych pakietow i bibliotek
 from flask import Flask
 import RPi.GPIO as gpio
+import time
 
 #Utworzenie instancji aplikacji Flask
 app = Flask(__name__)
@@ -18,6 +19,8 @@ def init():
     motor2=gpio.PWM(35, 1000)
     motor1.start(50)
     motor2.start(50)
+    time.sleep(2)
+    return [motor1,motor2]    	
     
 
 # Jazda do przodu
@@ -30,7 +33,7 @@ def forward():
     return 'forward'
 
 
-# Obrot w lewo
+# Obrót w lewo
 @app.route('/pivot_left')
 def pivot_left():
     gpio.output(7,True)
@@ -40,7 +43,7 @@ def pivot_left():
     return 'left'
 
 
-# Obrot w prawo
+# Obrót w prawo
 @app.route('/pivot_right')
 def pivot_right():
     gpio.output(7,False)
@@ -56,8 +59,14 @@ def neutral():
     return 'neutral'
 
 
-
-init()
-
-if __name__ == '__main__':
-	app.run(debug=True,host='192.168.88.124')
+#Aplikacja sterowania
+motor=init()
+try:
+    if __name__ == '__main__':
+        app.run(debug=True,host='192.168.88.124')
+except:
+    print("Koniec pracy programu")
+motor[0].stop()
+motor[1].stop()
+gpio.cleanup()
+            
