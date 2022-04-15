@@ -1,1 +1,9 @@
-# Wykorzystanie sygnałów EEG do sterowania robotem mobilnym.
+# Wykorzystanie sygnałów EEG do sterowania robotem mobilnym (_The use of EEG signals to control a mobile robot_) 
+
+## Description 
+In order to control the movements of the mobile robot, the recorded signals need to be properly processed, classified and assigned to the control commands. The initial stage of EEG signal processing begins in the Insight device, in which mains noise and harmonic frequencies are removed. The signals are sampled at a frequency of 2048Hz, then a dual notch filter at 50 Hz and 60 Hz as well as a low pass filter at 64 Hz are applied. After filtration, the samples are transmitted to the computer at a frequency of 128 Hz. The application, written in Python, is connecting to the headset and subscribes to the appropriate data channels, and then, depending on the selected features, the program processes data and assigns its defined classes. Each class, however, is equivalent to a certain command controlling the movement of the mobile robot. The classification is made on the basis of the one-second time window of the signals from the five electrodes. To ensure smooth control, a window width of 0.25 seconds is used. It is important to provide characteristic signals that are easily distinguishable in order to obtain a good accuracy of the classification. Based on the observation of the EEG signal, stimuli are selected to attempt to control the mobile robot. Muscle activities, more specifically facial expressions, and thought activities based on imagined robot movements are used for this purpose. The selection of the appropriate classifier is also of great importance in the context of achieving final success. Many classification algorithms available in the scikit-learn module of the Python language are tested.
+
+
+<p align="center">
+  <img src="https://github.com/djairw4/Praca-inzynierska/blob/main/schemat.png" width=900/>
+</p>
